@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+	<h1>BMI指数调查</h1>
+	<p>欢迎参与我们的BMI指数调查！请填写以下信息：</p>
+	<form onsubmit="calculateBMI(event)">
+		<label for="name">姓名：</label>
+		<input type="text" id="name" name="name"><br><br>
+		<label for="age">年龄：</label>
+		<input type="number" id="age" name="age"><br><br>
+		<label for="gender">性别：</label>
+		<select id="gender" name="gender">
+			<option value="male">男</option>
+			<option value="female">女</option>
+			<option value="fair">武装直升机</option>
+		</select><br><br>
+		<label for="height">身高（cm）：</label>
+		<input type="number" id="height" name="height"><br><br>
+		<label for="weight">体重（kg）：</label>
+		<input type="number" id="weight" name="weight"><br><br>
+		<button type="submit">提交</button>
+	</form>
+
+	<div id="result"></div>
+
+	<script>
+		function calculateBMI(event) {
+			event.preventDefault();
+
+			let name = document.getElementById("name").value;
+			let age = document.getElementById("age").value;
+			let gender = document.getElementById("gender").value;
+			let height = document.getElementById("height").value;
+			let weight = document.getElementById("weight").value;
+
+			let bmi = weight / ((height/100) ** 2);
+
+			let result = document.getElementById("result");
+
+			if (bmi < 18.5) {
+				result.innerHTML = `${name}，你的BMI指数为${bmi.toFixed(2)}，属于偏瘦。`;
+			} else if (bmi >= 18.5 && bmi < 24) {
+				result.innerHTML = `${name}，你的BMI指数为${bmi.toFixed(2)}，属于正常范围。`;
+			} else if (bmi >= 24 && bmi < 28) {
+				result.innerHTML = `${name}，你的BMI指数为${bmi.toFixed(2)}，属于超重。`;
+			} else if (bmi >= 28 && bmi < 32) {
+				result.innerHTML = `${name}，你的BMI指数为${bmi.toFixed(2)}，属于肥胖。`;
+			} else {
+				result.innerHTML = `${name}，你的BMI指数为${bmi.toFixed(2)}，属于重度肥胖。`;
+			}
+		}
+	</script>
+</body>
+</html>
